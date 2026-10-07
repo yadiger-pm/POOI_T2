@@ -1,0 +1,31 @@
+﻿@model POOI_T2_Medrano.Models.Alumno
+
+@{
+    ViewBag.Title = "Detalles del Alumno";
+}
+
+<h2>Detalles del Alumno</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>DNI:</dt>
+        <dd>@Html.DisplayFor(model => model.dni)</dd>
+
+        <dt>Nombres:</dt>
+        <dd>@Html.DisplayFor(model => model.nombres)</dd>
+
+        <dt>Apellidos:</dt>
+        <dd>@Html.DisplayFor(model => model.apellidos)</dd>
+
+        <dt>Carrera:</dt>
+        <dd>@Html.DisplayFor(model => model.carrera)</dd>
+
+        <dt>Ciclo:</dt>
+        <dd>@Html.DisplayFor(model => model.ciclo)</dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Actualizar", "Actualizar", new { dni = Model.dni }, new { @class = "btn btn-warning" }) |
+    @Html.ActionLink("Regresar al Listado", "Index", null, new { @class = "btn btn-default" })
+</p>

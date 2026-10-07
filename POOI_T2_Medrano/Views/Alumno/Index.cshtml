@@ -1,0 +1,64 @@
+﻿@model IEnumerable<POOI_T2_Medrano.Models.Alumno>
+
+@{
+    ViewBag.Title = "Listado de Alumnos";
+}
+
+<h2>Listado de Alumnos</h2>
+
+@if (TempData["Mensaje"] != null)
+{
+    <div id="msgAlert" class="alert alert-success">
+        @TempData["Mensaje"]
+    </div>
+    <script>
+        setTimeout(function () {
+            var msg = document.getElementById('msgAlert');
+            if (msg) msg.style.display = 'none';
+        }, 5000);
+    </script>
+}
+
+<p>
+    @Html.ActionLink("Agregar Nuevo Alumno", "Agregar", null, new { @class = "btn btn-primary" })
+</p>
+
+<div class="row my-3">
+    <div class="col-md-4">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Total de Alumnos Registrados</h3>
+            </div>
+            <div class="panel-body">
+                <h2>@Model.Count()</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table table-hover table-striped table-bordered align-middle">
+    <tr>
+        <th>DNI</th>
+        <th>Nombres</th>
+        <th>Apellidos</th>
+        <th>Carrera</th>
+        <th>Ciclo</th>
+        <th>Acciones</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.dni)</td>
+            <td>@Html.DisplayFor(modelItem => item.nombres)</td>
+            <td>@Html.DisplayFor(modelItem => item.apellidos)</td>
+            <td>@Html.DisplayFor(modelItem => item.carrera)</td>
+            <td>@Html.DisplayFor(modelItem => item.ciclo)</td>
+            <td>
+                @Html.ActionLink("Actualizar", "Actualizar", new { dni = item.dni }, new { @class = "btn btn-warning btn-sm" }) |
+                @Html.ActionLink("Detalles", "Detalles", new { dni = item.dni }, new { @class = "btn btn-info btn-sm" }) |
+                @Html.ActionLink("Eliminar", "Eliminar", new { dni = item.dni }, new { @class = "btn btn-danger btn-sm", onclick = "return confirm('¿Está seguro de eliminar este registro?');" })
+            </td>
+        </tr>
+    }
+</table>
